@@ -1,2 +1,19 @@
-<h1>Admin::Genres#edit</h1>
-<p>Find me in app/views/admin/genres/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h1>Admin::Genres#edit</h1>
+    <div class="col-md-11">
+      <%= form_with model: @genre, url: admin_genres_path, method: :patch do |f| %>
+      <div class="form-group">
+        <%= f.label :genre_name, "ジャンル名" %>
+        <%= f.text_field :genre_name, class: "form-conrol" %>
+      </div>
+
+      <% end %>
+    </div>
+
+
+</div>
+
+
+
+</div>
