@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+
+  namespace :public do
+    resources :items, only:[:index, :show]
+
+  end
+
   namespace :admin do
     resources :genres, only:[:index, :create, :edit, :update]
   end
