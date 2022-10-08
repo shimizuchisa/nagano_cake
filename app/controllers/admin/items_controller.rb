@@ -6,8 +6,18 @@ class Admin::ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+    @item.is_active = true
     @item.save
-    redirect_to "/items"
+    redirect_to admin_items_path
+  end
+
+  def index
+    @items = Item.all
+    # comment = current_user.post_comments.new(post_comment_params)
+  end
+
+  def show
+    @item = Item.find(params[:id])
   end
 
   def edit
@@ -17,7 +27,7 @@ class Admin::ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     @item.update(item_params)
-    redirect_to "/items"
+    redirect_to admin_items_path
   end
 
   private

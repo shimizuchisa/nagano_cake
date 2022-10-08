@@ -1,2 +1,41 @@
 <h1>Admin::Items#edit</h1>
 <p>Find me in app/views/admin/items/edit.html.erb</p>
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-11">
+      <%= form_with model: @item, url: admin_item_path(@item), method: :patch do |f| %>
+        <div class="form_group">
+        <%= f.label :genre_id %>
+        <%= f.collection_select :genre_id, Genre.all, :id, :genre_name, :prompt => true %>
+        </div>
+
+        <div class="form_group">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+        </div>
+
+        <div class="form_group">
+        <%= f.label :image %>
+        <%= f.file_field :image, accept: "image/*" %>
+        </div>
+
+        <div class="form_group">
+        <%= f.label :introduction %>
+        <%= f.text_area :introduction %>
+        </div>
+
+        <div class="form_group">
+        <%= f.label :price %>
+        <%= f.text_field :price %>
+        </div>
+
+        <div class="form_group">
+        <%= f.submit "Update item", class: "btn btn-success btn-sm" %>
+        </div>
+
+      <% end %>
+      </div>
+    </div>
+  </div>
+</main>
