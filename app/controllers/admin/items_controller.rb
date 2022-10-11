@@ -6,7 +6,6 @@ class Admin::ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @item.is_active = true
     @item.save
     redirect_to admin_items_path
   end
