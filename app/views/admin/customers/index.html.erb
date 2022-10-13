@@ -15,6 +15,7 @@
               <th>注文</th>
               <th>配送先</th>
               <th>退会</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -28,6 +29,7 @@
                 <span>＊</span>
               <% end %>
               </td>
+              <td><%= link_to "show", admin_customer_path(customer.id), class: "btn btn-success btn-sm" %></td>
             </tr>
           </tbody>
         </table>
