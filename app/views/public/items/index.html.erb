@@ -1,2 +1,30 @@
-<h1>Public::Items#index</h1>
-<p>Find me in app/views/public/items/index.html.erb</p>
+<div class="container">
+  <%= render 'layouts/public_header_template' %>
+  <h1>Public::Items#index</h1>
+
+  <div class="row">
+    <div class="col-md-10">
+      <% @items.each do |item| %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ジャンル</th>
+              <th>商品名</th>
+              <th>価格（税抜）</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= item.genre.genre_name %></td> <!--belongs_toだから、「genre」 *genresではない-->
+              <td><%= item.name %></td>
+              <td><%= item.price %></td>
+              <td><%= link_to "show", item_path(item.id), class: "btn btn-success" %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+
+      </div>
+    </div>
+  </div>

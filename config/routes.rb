@@ -1,11 +1,20 @@
 Rails.application.routes.draw do
 
   root to: 'public/homes#top'
-  get '/about' => 'public/homes#about'
+  get 'about' => 'public/homes#about'
+  # get '/customers/my_page' => 'public/customers#show'
+  # get '/customers/my_page/edit' => 'public/customers#edit'
 
-  namespace :public do
-    resources :customers
+  # namespace :public do
+  scope module: :public do
+    resources :customers, only:[:confirm, :unsubscribe]
+    get 'customers/my_page', to: 'customers#show'
+    get 'customers/my_page/edit', to: 'customers#edit'
+    patch 'customers/my_page', to: 'customers#update'
     resources :items, only:[:index, :show]
+    resources :cart_items, only:[:index, :create, :update, :destoy, :destroy_all]
+    resources :orders, only:[:new, :confirm, :complete, :create, :index, :show]
+    resources :addresses, only:[:index, :create, :edit, :update, :destroy]
   end
 
   namespace :admin do
