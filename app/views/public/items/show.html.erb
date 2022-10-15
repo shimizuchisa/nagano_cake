@@ -1,2 +1,41 @@
-<h1>Public::Items#show</h1>
-<p>Find me in app/views/public/items/show.html.erb</p>
+<!--admin/items/show-->
+<div class="container">
+  <%= render 'layouts/public_header_template' %>
+
+  <div class="row">
+    <h1>Public::Items#show</h1>
+    <div class="col-md-10">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ジャンル</th>
+              <th>商品名</th>
+              <th>image</th>
+              <th>introduction</th>
+              <th>価格（税抜）</th>
+              <th>ステータス</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @item.genre_id %></td>
+              <td><%= @item.name %></td>
+              <td><%= image_tag @item.get_image(100, 100) %></td>
+              <td><%= @item.introduction %></td>
+              <td><%= @item.price %></td>
+              <td>
+                <% if  @item.is_active == true %>
+                  <%= link_to "カートに入れる", cart_items_path, method: :put, class: "btn btn-success" %>
+                <% else %>
+                 <span>準備中</span>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <%= link_to "index", items_path %>
+
+    </div>
+  </div>
+</div>

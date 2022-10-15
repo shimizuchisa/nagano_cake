@@ -1,2 +1,37 @@
-<h1>Public::CartItems#index</h1>
-<p>Find me in app/views/public/cart_items/index.html.erb</p>
+<div class="container">
+  <%= render 'layouts/public_header_template' %>
+
+  <div class="row">
+    <h1>Public::CartItems#index</h1>
+
+    <div class="col-md-10">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>商品ジャンル</th>
+            <th>商品名</th>
+            <th>価格</th>
+            <th>数量</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |cart_item| %>
+          <tr>
+            <td>item.genre %></td>
+            <td>item.name %></td>
+            <td>item.price %></td>
+            <%= form_with model: cart_item, url: edit_cart_item_path do |f| %>
+              <td><%= f.text_field :amount %></td>
+              <td><%= link_to "数量変更", cart_item_path, class: "btn btn-success" %></td>
+            <% end %>
+            <td><%= link_to "削除", destroy_cart_item_path, class: "btn btn-success" %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+</div>
+

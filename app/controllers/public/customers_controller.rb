@@ -1,14 +1,14 @@
 class Public::CustomersController < ApplicationController
   def show
-    @customer = Customer.find_by(current_customer)
+    @customer = Customer.find(current_customer.id)
   end
 
   def edit
-    @customer = Customer.find_by(current_customer)
+    @customer = Customer.find(current_customer.id)
   end
 
   def update
-    @customer = Customer.find_by(current_customer)
+    @customer = Customer.find(current_customer.id)
     @customer.update(customer_params)
     redirect_to customers_my_page_path
   end
