@@ -1,41 +1,49 @@
-<!--admin/items/show-->
-<div class="container">
+<!--public/items/show-->
+<body>
   <%= render 'layouts/public_header_template' %>
+  <main>
+    <div class="container">
+      <div class="row">
+        <h1><%= @item.name %></h1>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <p>image</p>
+          <div>
+            <%= image_tag @item.get_image(100, 100) %>
+          </div>
+        </div>
 
-  <div class="row">
-    <h1>Public::Items#show</h1>
-    <div class="col-md-10">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>ジャンル</th>
-              <th>商品名</th>
-              <th>image</th>
-              <th>introduction</th>
-              <th>価格（税抜）</th>
-              <th>ステータス</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><%= @item.genre_id %></td>
-              <td><%= @item.name %></td>
-              <td><%= image_tag @item.get_image(100, 100) %></td>
-              <td><%= @item.introduction %></td>
-              <td><%= @item.price %></td>
-              <td>
-                <% if  @item.is_active == true %>
-                  <%= link_to "カートに入れる", cart_items_path, method: :put, class: "btn btn-success" %>
-                <% else %>
-                 <span>準備中</span>
-                <% end %>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <%= link_to "index", items_path %>
+        <div class="col-md-5">
+          <p>ジャンル：<%= @item.genre.genre_name %></p>
+          <p>introduction：<%= @item.introduction %></p>
+          <p>価格（税抜）：<%= @item.price %></p>
+          <% if  @item.is_active == true %>
+            <div class="field">
+              <div class="form-group">
+              <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+                <!--%= f.hidden_field :title, :value => "楽しいRuby" %-->
+                <%= f.hidden_field :item_id, value: @item.id %>
+                <%= f.hidden_field :customer_id, value: current_customer.id %>
+                <div class="form-group">
+                  <%= f.label :amount, "数量" %>
+                  <%= f.select :amount, *[1..10] %>
+                </div>
+                <div class="form-group">
+                  <%= f.submit "カートに入れる", class: "btn btn-success" %>
+                </div>
+              <% end %>
+              </div>
+            </div>
+          <% else %>
+            <p>：準備中</p>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+          <%= link_to "index", items_path, class: "ml-auto mt-5 btn btn-success" %>
+      </div>
 
     </div>
-  </div>
-</div>
+  </main>
+</body>
