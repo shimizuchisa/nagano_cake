@@ -15,12 +15,15 @@
             </tr>
           </thead>
           <tbody>
+            <% if item.is_active == false %>
+            <% else %>
             <tr>
               <td><%= item.genre.genre_name %></td> <!--belongs_toだから、「genre」 *genresではない-->
               <td><%= item.name %></td>
               <td><%= item.price %></td>
               <td><%= link_to "show", item_path(item.id), class: "btn btn-success" %></td>
             </tr>
+            <% end %>
           </tbody>
         </table>
       <% end %>
