@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  # before_action :authenticate_customer!, except: [:top, :about]
+  before_action :authenticate_customer!, except: [:top, :about]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    about_path
+    customers_my_page_path
   end
 end

@@ -1,0 +1,23 @@
+<!--admin/orders/edit-->
+<body>
+  <%= render 'layouts/admin_header_template' %>
+  <main>
+    <div class="container">
+      <div class="row">
+        <h1>注文詳細</h1>
+
+
+        <div class="col-md-5">
+          <%= order.id %>
+          <%= order.order_status %>
+
+        <% @order_items.each do |order_item| %>
+          <%= order_item.item.name %>
+          <%= order_item.amount %>
+          <%= order_item.making_status %>
+        <% end %>
+      </div>
+    </div>
+  </main>
+  <%= render 'layouts/footer_template' %>
+</body>

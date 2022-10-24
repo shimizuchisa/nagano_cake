@@ -1,41 +1,46 @@
 <!--admin/items/index-->
-<h1>Admin::Items#Index</h1>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-11">
-      <% @items.each do |item| %>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>ジャンル</th>
-              <th>商品名</th>
-              <th>image</th>
-              <th>価格（税抜）</th>
-              <th>ステータス</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><%= item.genre.genre_name %></td> <!--belongs_toだから、「genre」 *genresではない-->
-              <td><%= item.name %></td>
-              <td><%= image_tag item.get_image(100, 100) %></td>
-              <td><%= item.price %></td>
-              <td>
-                <% if item.is_active == true %>
-                  <%= "販売中" %>
-                <% else %>
-                  <%= "準備中" %>
-                <% end %>
-              </td>
-              <td><%= link_to "Show", (admin_item_path(item.id)),class: "btn btn-success"  %></td>
-            </tr>
-          </tbody>
-        </table>
-      <% end %>
+<body>
+  <%= render 'layouts/admin_header_template' %>
+  <main>
+    <div class="container">
+      <h1>商品一覧</h1>
+      <div class="row">
+        <div class="col-md-10">
+          <% @items.each do |item| %>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>ジャンル</th>
+                <th>商品名</th>
+                <th>image</th>
+                <th>価格（税抜）</th>
+                <th>ステータス</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= item.genre.genre_name %></td> <!--belongs_toだから、「genre」 *genresではない-->
+                <td><%= item.name %></td>
+                <td><%= image_tag item.get_image(100, 100) %></td>
+                <td><%= item.price %></td>
+                <td>
+                  <% if item.is_active == true %>
+                    <%= "販売中" %>
+                  <% else %>
+                    <%= "準備中" %>
+                  <% end %>
+                </td>
+                <td><%= link_to "Show", (admin_item_path(item.id)),class: "btn btn-success" %></td>
+              </tr>
+            </tbody>
+          </table>
+        <% end %>
 
-      <%= link_to "new", new_admin_item_path %>
-
+        <%= link_to "new", new_admin_item_path %>
+        </div>
       </div>
     </div>
-  </div>
+  </main>
+  <%= render 'layouts/footer_template' %>
+</body>

@@ -1,33 +1,81 @@
-<div class="container">
+<body>
   <%= render 'layouts/public_header_template' %>
-  <h1>Public::Items#index</h1>
-
-  <div class="row">
-    <div class="col-md-10">
-      <% @items.each do |item| %>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>ジャンル</th>
-              <th>商品名</th>
-              <th>価格（税抜）</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% if item.is_active == false %>
-            <% else %>
-            <tr>
-              <td><%= item.genre.genre_name %></td> <!--belongs_toだから、「genre」 *genresではない-->
-              <td><%= item.name %></td>
-              <td><%= item.price %></td>
-              <td><%= link_to "show", item_path(item.id), class: "btn btn-success" %></td>
-            </tr>
+  <main>
+    <div class="container">
+      <h1 class="mb-5">Products</h1>
+      <h2>ケーキ</h2>
+      <div class="row">
+        <div class="col-10 mx-auto d-flex flex-wrap">
+          <% @cakes.each do |cake| %>
+            <% if cake.is_active == true %>
+            <div class="card d-inline-flex" style="width: 33%;">
+              <%= image_tag cake.get_image(100, 100), class: "card-img-top" %>
+              <div class="card-body">
+                <h5 class="card-title"><%= cake.name %></h5>
+                <p class="card-text">price：<span><%= cake.price %>円</span></p>
+                <%= link_to "show", item_path(cake.id), class: "btn btn-success btn-block" %>
+              </div>
+            </div>
             <% end %>
-          </tbody>
-        </table>
-      <% end %>
-
+          <% end %>
+        </div>
       </div>
+
+      <h2 class="mt-5">プリン</h2>
+      <div class="row">
+        <div class="col-10 mx-auto d-flex flex-wrap">
+          <% @puddings.each do |pudding| %>
+            <% if pudding.is_active == true %>
+          <div class="card d-inline-flex" style="width: 33%;">
+            <%= image_tag pudding.get_image(100, 100), class: "card-img-top" %>
+            <div class="card-body">
+              <h5 class="card-title"><%= pudding.name %></h5>
+              <p class="card-text">price：<span><%= pudding.price %>円</span></p>
+              <%= link_to "show", item_path(pudding.id), class: "btn btn-success btn-block" %>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+        </div>
+      </div>
+
+      <h2 class="mt-5">焼き菓子</h2>
+      <div class="row">
+        <div class="col-10 mx-auto d-flex flex-wrap">
+          <% @baked_sweets.each do |baked_sweet| %>
+           <% if baked_sweet.is_active == true %>
+          <div class="card d-inline-flex" style="width: 33%;">
+            <%= image_tag baked_sweet.get_image(100, 100), class: "card-img-top" %>
+            <div class="card-body">
+              <h5 class="card-title"><%= baked_sweet.name %></h5>
+              <p class="card-text">price：<span><%= baked_sweet.price %>円</span></p>
+              <%= link_to "show", item_path(baked_sweet.id), class: "btn btn-success btn-block" %>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+        </div>
+      </div>
+
+      <h2 class="mt-5">キャンディ</h2>
+      <div class="row">
+        <div class="col-10 mx-auto d-flex flex-wrap">
+          <% @candys.each do |candy| %>
+           <% if candy.is_active == true %>
+          <div class="card d-inline-flex" style="width: 33%;">
+            <%= image_tag candy.get_image(100, 100), class: "card-img-top" %>
+            <div class="card-body">
+              <h5 class="card-title"><%= candy.name %></h5>
+              <p class="card-text">price：<span><%= candy.price %>円</span></p>
+              <%= link_to "show", item_path(candy.id), class: "btn btn-success btn-block" %>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+        </div>
+      </div>
+
     </div>
-  </div>
+  </main>
+  <%= render 'layouts/footer_template' %>
+</body>

@@ -1,11 +1,13 @@
 <!--nagano_cake admin/customer/edit-->
+<body>
+  <main>
+  <%= render 'layouts/admin_header_template' %>
+
 
 <div class="container">
   <div class="row">
+    <h1>顧客情報更新</h1>
     <div class="col-md-10">
-      <h1>Admin::Customers#edit</h1>
-      <p>Find me in app/views/admin/customers/edit.html.erb</p>
-
       <div class="field">
         <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch do |f| %>
 
@@ -66,3 +68,6 @@
     </div>
   </div>
 </div>
+</main>
+ <%= render 'layouts/footer_template' %>
+</body>

@@ -1,8 +1,12 @@
-<div class="container">
+<body>
   <%= render 'layouts/public_header_template' %>
+  <main>
+
+<div class="container">
+
 
   <div class="row">
-    <h1>Public::Addresses#index</h1>
+    <h1 class="mb-5">配送先登録</h1>
 
     <div class="col-md-10">
       <div class="field">
@@ -29,8 +33,6 @@
         <% end %>
       </div>
 
-
-      <% @addresses.each do |address| %>
       <table class="table">
         <thead>
           <tr>
@@ -38,20 +40,26 @@
             <th>郵便番号</th>
             <th>配送先</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
+          <% @addresses.each do |address| %>
           <tr>
             <td><%= address.name %></td>
             <td><%= address.postal_code %></td>
             <td><%= address.address %></td>
             <td>
-              <%= link_to "edit", edit_address_path(address.id), class: "btn btn-success" %>
+              <%= link_to "修正", edit_address_path(address.id), class: "btn btn-success" %>
             </td>
+            <td><%= link_to "削除", address_path(address.id), method: :delete, class: "btn btn-danger" %> </td>
           </tr>
+          <% end %>
         </tbody>
       </table>
-      <% end %>
     </div>
   </div>
 </div>
+  </main>
+  <%= render 'layouts/footer_template' %>
+</body>

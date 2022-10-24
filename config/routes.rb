@@ -2,19 +2,19 @@ Rails.application.routes.draw do
 
   root to: 'public/homes#top'
   get 'about' => 'public/homes#about'
-  # get '/customers/my_page' => 'public/customers#show'
-  # get '/customers/my_page/edit' => 'public/customers#edit'
 
-  # namespace :public do
   scope module: :public do
     get 'customers/my_page', to: 'customers#show'
     get 'customers/my_page/edit', to: 'customers#edit'
     patch 'customers/my_page', to: 'customers#update'
     get 'customers/confirm', to: 'customers#confirm'
     patch 'customers/unsubscribe', to: 'customers#unsubscribe'
+    delete 'cart_items/destroy_all', to: 'cart_items#destroy_all'
+    post 'orders/confirm', to: 'orders#confirm'
+    get 'orders/complete', to: 'orders#complete'
     resources :items, only:[:index, :show]
-    resources :cart_items, only:[:index, :create, :update, :destoy, :destroy_all]
-    resources :orders, only:[:new, :confirm, :complete, :create, :index, :show]
+    resources :cart_items, only:[:index, :create, :update, :destroy]
+    resources :orders, only:[:new, :create, :index, :show]
     resources :addresses, only:[:index, :create, :edit, :update, :destroy]
   end
 
@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     resources :genres, only:[:index, :create, :edit, :update]
     resources :items, only:[:index, :new, :create, :show, :edit, :update]
     resources :customers, only:[:index, :show, :edit, :update]
+    resources :order_items, only:[:update]
+    resources :orders, only:[:update, :edit]
   end
 
 

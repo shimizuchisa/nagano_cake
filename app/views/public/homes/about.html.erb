@@ -1,7 +1,20 @@
 <body>
   <%= render 'layouts/public_header_template' %>
-  <h1>Public::Homes#about</h1>
+  <main>
+    <div class="container">
+      <div class="row">
+        <h1 class="mx-auto">Information</h1>
+      </div>
+      <div class="mx-auto col-md-8">
+        <h2>address</h2>
+        <p>東京都〜</p>
+        <h2>tell</h2>
+        <p>03-1234-5678</p>
+        <h2>open/close</h2>
+        <p>10:00-18:00　（火曜定休）</p>
+      </div>
+    </div>
 
-  <p>Find me in app/views/public/homes/about.html.erb</p>
-
+  </main>
+  <%= render 'layouts/footer_template' %>
 </body>

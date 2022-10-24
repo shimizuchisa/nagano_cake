@@ -4,46 +4,37 @@
   <main>
     <div class="container">
       <div class="row">
-        <h1><%= @item.name %></h1>
+        <h1 class="mb-5"><%= @item.name %></h1>
       </div>
       <div class="row">
-        <div class="col-md-5">
-          <p>image</p>
+        <div class="col-6">
           <div>
-            <%= image_tag @item.get_image(100, 100) %>
+            <%= image_tag @item.get_image(500, 500) %>
           </div>
         </div>
 
-        <div class="col-md-5">
-          <p>ジャンル：<%= @item.genre.genre_name %></p>
+        <div class="col-6">
           <p>introduction：<%= @item.introduction %></p>
           <p>価格（税抜）：<%= @item.price %></p>
-          <% if  @item.is_active == true %>
-            <div class="field">
+          <div class="field">
+            <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
               <div class="form-group">
-              <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
-                <!--%= f.hidden_field :title, :value => "楽しいRuby" %-->
                 <%= f.hidden_field :item_id, value: @item.id %>
-                <%= f.hidden_field :customer_id, value: current_customer.id %>
-                <div class="form-group">
-                  <%= f.label :amount, "数量" %>
-                  <%= f.select :amount, *[1..10] %>
-                </div>
-                <div class="form-group">
-                  <%= f.submit "カートに入れる", class: "btn btn-success" %>
-                </div>
-              <% end %>
               </div>
-            </div>
-          <% else %>
-            <p>：準備中</p>
-          <% end %>
+              <div class="form-group">
+                <%= f.label :amount, "数量" %>
+                <%= f.select :amount, *[1..10] %>
+              </div>
+              <div class="form-action">
+                <%= f.submit "カートに入れる", class: "btn btn-success w-50" %>
+              </div>
+            <% end %>
+          </div>
         </div>
-      </div>
       <div class="row">
-          <%= link_to "index", items_path, class: "ml-auto mt-5 btn btn-success" %>
+        <%= link_to "index", items_path, class: "ml-auto mt-5 btn btn-success" %>
       </div>
-
     </div>
   </main>
+  <%= render 'layouts/footer_template' %>
 </body>

@@ -1,13 +1,14 @@
 <!--admin/items/new-->
-<h1>Admin::Items#new</h1>
-<p>Find me in app/views/admin/items/new.html.erb</p>
-<main>
-  <div class="container">
-    <div class="row">
+<body>
+ <%= render 'layouts/admin_header_template' %>
+  <main>
+    <div class="container">
+      <div class="row">
+        <h1 class="mb-5">商品一覧</h1>
       <div class="col-md-11">
-      <%= form_with model: @item, url: admin_items_path do |f| %>
+        <%= form_with model: @item, url: admin_items_path do |f| %>
         <div class="form-group">
-          <%= f.label :genre_id, "ジャンルID" %>
+          <%= f.label :genre_id, "ジャンルID" %><br>
           <!--f.collection_select <属性名>, <プルダウンメニュー表示用の配列データ>, <valueとして扱うカラム名>,  <表示用のカラム名>, <オプション>-->
           <%= f.collection_select :genre_id, Genre.all, :id, :genre_name, :prompt => true %>
         </div>
@@ -37,9 +38,11 @@
         </div>
       <% end %>
 
-      <%= link_to "index", admin_items_path %>
+      <%= link_to "index", admin_items_path, class: "btn btn-light" %>
 
+        </div>
       </div>
     </div>
-  </div>
-</main>
+  </main>
+  <%= render 'layouts/footer_template' %>
+</body>

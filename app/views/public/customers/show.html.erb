@@ -1,60 +1,67 @@
-<div class="container">
+<body>
   <%= render 'layouts/public_header_template' %>
-  <div class="row">
-    <div class="col-md-10">
-      <h1>Public::Customers#show</h1>
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10">
+          <h1>My page</h1>
 
-      <table class="table">
-          <tbody>
-            <tr>
-              <th>会員ID</th>
-              <th><%= @customer.id %></th>
-            </tr>
-            <tr>
-              <td>御名前</td>
-              <td><%= @customer.last_name %> <%= @customer.first_name %></td>
-            </tr>
-            <tr>
-              <td>フリガナ</td>
-              <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
-            </tr>
-            <tr>
-              <td>メールアドレス</td>
-              <td><%= @customer.email %></td>
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>会員ID</td>
+                <td><%= @customer.id %></td>
               </tr>
-            <tr>
-              <td>郵便番号</td>
-              <td><%= @customer.postal_code %></td>
-            </tr>
-            <tr>
-              <td>住所</td>
-              <td><%= @customer.address %></td>
-            </tr>
-            <tr>
-              <td>電話番号</td>
-              <td><%= @customer.telephone_number %></td>
-            </tr>
-          </tbody>
-        </table>
+              <tr>
+                <td>御名前</td>
+                <td><%= @customer.last_name %> <%= @customer.first_name %></td>
+              </tr>
+              <tr>
+                <td>フリガナ</td>
+                <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
+              </tr>
+              <tr>
+                <td>メールアドレス</td>
+                <td><%= @customer.email %></td>
+                </tr>
+              <tr>
+                <td>郵便番号</td>
+                <td><%= @customer.postal_code %></td>
+              </tr>
+              <tr>
+                <td>住所</td>
+                <td><%= @customer.address %></td>
+              </tr>
+              <tr>
+                <td>電話番号</td>
+                <td><%= @customer.telephone_number %></td>
+              </tr>
+            </tbody>
+          </table>
 
-        <div class="btn btn-success">
-          <%= link_to "Customer edit", customers_my_page_edit_path %>
+          <div class="d-flex justify-content-between">
+          <div class="btn btn-success">
+            <%= link_to "Customer edit", customers_my_page_edit_path %>
+          </div>
+
+          <div class="btn btn-success">
+            <%= link_to "Cart", cart_items_path %>
+          </div>
+
+          <div class="btn btn-success">
+            <%= link_to "Your order index", orders_path %>
+          </div>
+
+          <div class="btn btn-success">
+            <%= link_to "New address", addresses_path %>
+          </div>
+          </div>
+
+
         </div>
-
-        <div class="btn btn-success">
-          <%= link_to "Cart", cart_items_path %>
-        </div>
-
-        <div class="btn btn-success">
-          <%= link_to "Your order index", orders_path %>
-        </div>
-
-        <div class="btn btn-success">
-          <%= link_to "New address", addresses_path %>
-        </div>
-
       </div>
     </div>
-  </div>
-</div>
+  </main>
+  <%= render 'layouts/footer_template' %>
+</body>
 
