@@ -2,7 +2,7 @@
   <%= render 'layouts/public_header_template' %>
   <main>
     <div class="container">
-      <h1 class="mb-5">注文確認</h1>
+      <h1 class="mb-5">お支払い方法・配送先選択</h1>
       <div class="row">
         <div class="col-10">
           <div class="field">
@@ -12,51 +12,49 @@
               <h5>お支払い方法</h5>
               <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
               <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %><br>
-              <%= f.radio_button :payment_method, Order.payment_methods_i18n[:transfer] %>
-              <%= f.label :payment_method, "" %>
+              <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+              <%= f.label :payment_method, Order.payment_methods_i18n[:transfer] %>
             </div>
 
             <!--住所選択-->
               <h5>お届け先</h5>
               <!--お客様の住所-->
-              <div class="form-group">
-                <%= f.radio_button :address_id, current_customer.address_display %>
-                <%= f.label :address_id, "お客様の住所" %><br>
-                <%= current_customer.address_display %>
-              </div>
+              <div class="address">
+                <%= f.radio_button :address_select, 0 %>
+                <%= f.label :address_select, "お客様の住所" %><br>
+                <%= current_customer.address_display %><br>
 
               <!--登録済み配送先-->
-                <%= f.radio_button :address_id, @addresses %>
-                <%= f.label :address_id, "登録済み住所から選択" %>
-              <div class="form-group">
-                <!--%= f.label :address_id, "" %><br>-->
-               <!--%= f.select :プロパティ名, options_from_collection_for_select(モデル, :フォームで送る値(メソッド), :セレクトボックスに表示する値(メソッド)) %>-->
-                <%= f.select :address_id ,options_from_collection_for_select(@addresses, :id, :address_display) %>
-              </div>
+                <%= f.radio_button :address_select, 1 %>
+                <%= f.label :address_select, "登録済み住所から選択" %>
+                  <div class="form-group">
+                    <!--%= f.select :プロパティ名, options_from_collection_for_select(モデル, :フォームで送る値(メソッド), :セレクトボックスに表示する値(メソッド)) %>-->
+                    <%= f.select :address_id ,options_from_collection_for_select(@addresses, :id, :address_display) %>
+                  </div>
 
               <!--新規入力-->
-                <%= f.radio_button :address_id, @order %>
-                <%= f.label :address_id, "新規お届け先" %>
+                <%= f.radio_button :address_select, 2 %>
+                <%= f.label :address_select, "新規お届け先" %>
+                  <div class="form-group">
+                    <%= f.label :name, "宛名" %>
+                    <%= f.text_field :name, class: "form-control"%>
+                  </div>
 
-                <div class="form-group">
-                  <%= f.label :name, "宛名" %>
-                  <%= f.text_field :name, class: "form-control"%>
+                  <div class="form-group">
+                    <%= f.label :postal_code, "郵便番号" %>
+                    <%= f.text_field :postal_code, class: "form-control"%>
+                  </div>
+
+                  <div class="form-group">
+                    <%= f.label :address, "お届け先住所" %>
+                    <%= f.text_field :address, class: "form-control"%>
+                  </div>
+
+                  <div class="form-action">
+                    <%= f.submit "確認画面へ進む", class: "btn btn-success" %>
+                  </div>
                 </div>
-
-                <div class="form-group">
-                  <%= f.label :postal_code, "郵便番号" %>
-                  <%= f.text_field :postal_code, class: "form-control"%>
-                </div>
-
-                <div class="form-group">
-                  <%= f.label :address, "配送先" %>
-                  <%= f.text_field :address, class: "form-control"%>
-                </div>
-
-            <div class="form-action">
-              <%= f.submit "確認画面へ進む", class: "btn btn-success" %>
-            </div>
-          <% end %>
+            <% end %>
           </div>
         </div>
       </div>

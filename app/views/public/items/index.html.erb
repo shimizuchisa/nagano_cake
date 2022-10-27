@@ -60,7 +60,7 @@
       <h2 class="mt-5">キャンディ</h2>
       <div class="row">
         <div class="col-10 mx-auto d-flex flex-wrap">
-          <% @candys.each do |candy| %>
+          <% @candies.each do |candy| %>
            <% if candy.is_active == true %>
           <div class="card d-inline-flex" style="width: 33%;">
             <%= image_tag candy.get_image(100, 100), class: "card-img-top" %>

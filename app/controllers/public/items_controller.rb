@@ -5,7 +5,7 @@ class Public::ItemsController < ApplicationController
     @cakes = Item.where(genre_id: 1)
     @puddings = Item.where(genre_id: 2)
     @baked_sweets = Item.where(genre_id: 3)
-    @candys = Item.where(genre_id: 4)
+    @candies = Item.where(genre_id: 4)
   end
 
   def show

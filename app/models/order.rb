@@ -7,4 +7,22 @@ class Order < ApplicationRecord
   def address_display
     "〒" + postal_code + ' ' + address + ' ' + name
   end
+
+  # def subtotal (cart_itemのmodel)
+    # item.with_tax_price * amount
+  # end
+
+
+  # def with_tax_price (itemのmodel)
+    # (price * 1.1).floor
+
+  # def total_calc
+    # sub_total = 0
+    # @cart_items.each do |c|
+      # sub_total = c.amount * c.item.with_tax_price
+      # total += sub_total
+    # end
+    # return total
+  # end
+
 end

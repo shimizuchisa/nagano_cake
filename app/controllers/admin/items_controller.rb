@@ -12,8 +12,10 @@ class Admin::ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all
-    # comment = current_user.post_comments.new(post_comment_params)
+    @cakes = Item.where(genre_id: 1)
+    @puddings = Item.where(genre_id: 2)
+    @baked_sweets = Item.where(genre_id: 3)
+    @candies = Item.where(genre_id: 4)
   end
 
   def show

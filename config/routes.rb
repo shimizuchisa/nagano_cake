@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get 'customers/confirm', to: 'customers#confirm'
     patch 'customers/unsubscribe', to: 'customers#unsubscribe'
     delete 'cart_items/destroy_all', to: 'cart_items#destroy_all'
+    get 'orders/confirm', to: 'orders#confirm'
     post 'orders/confirm', to: 'orders#confirm'
     get 'orders/complete', to: 'orders#complete'
     resources :items, only:[:index, :show]
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get '/' => 'homes#top'
+    get '/' => 'homes#top', as: :root
     resources :genres, only:[:index, :create, :edit, :update]
     resources :items, only:[:index, :new, :create, :show, :edit, :update]
     resources :customers, only:[:index, :show, :edit, :update]
