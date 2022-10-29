@@ -25,9 +25,12 @@ class Public::CartItemsController < ApplicationController
   end
 
   def update
-    @cart_item = CartItem.find(params[:id])
-    @cart_item.customer_id = current_customer.id
-    @cart_item.update(cart_item_params)
+    #indexだから:idで引っ張れない！
+    cart_item = current_customer.cart_items.find(params[:id])
+    # @cart_item.amount = params[:@cart_item][:amount]
+    # @cart_item.customer_id = current_customer.id
+    # binding.pry
+    cart_item.update(cart_item_params)
     redirect_to cart_items_path
 
   end

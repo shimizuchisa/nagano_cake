@@ -5,34 +5,28 @@
       <h1 class="mb-5">ご注文一覧</h1>
       <div class="row">
         <div class="col-10">
-
-          <% @orders.each do |order| %>
-          <table>
-            <tbody>
-              <tr>
-                <td>ご注文番号</td>
-                <td><%= order.id %></td>
-              </tr>
-              <tr>
-                <td>宛名</td>
-                <td><%= order.name %></td>
-              </tr>
-              <tr>
-                <td>お届け先</td>
-                <td><%= order.address_display %></td>
-              </tr>
-              <tr>
-                <td>ご請求金額</td>
-                <td><%= order.grand_total %></td>
-              </tr>
-              <tr>
-                <td>お支払い方法</td>
-                <td><%= order.payment_method %></td>
-              </tr>
-            </tbody>
-          </table>
-          <% end %>
-
+          <div class="order_field mb-3">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ご注文日時</th>
+                  <th>宛名</th>
+                  <th>ご請求金額</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @orders.each do |order| %>
+                <tr>
+                  <td><%= order.created_at %></td>
+                  <td><%= order.address %></td>
+                  <td><%= order.grand_total %></td>
+                  <td><%= link_to "ご注文詳細", order_path(order), class: "btn btn-light" %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

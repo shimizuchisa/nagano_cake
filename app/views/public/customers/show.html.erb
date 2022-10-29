@@ -38,28 +38,27 @@
               </tr>
             </tbody>
           </table>
-
-          <div class="d-flex justify-content-between">
-          <div class="btn btn-success">
-            <%= link_to "Customer edit", customers_my_page_edit_path %>
-          </div>
-
-          <div class="btn btn-success">
-            <%= link_to "Cart", cart_items_path %>
-          </div>
-
-          <div class="btn btn-success">
-            <%= link_to "Your order index", orders_path %>
-          </div>
-
-          <div class="btn btn-success">
-            <%= link_to "New address", addresses_path %>
-          </div>
-          </div>
-
-
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-3">
+          <%= link_to "Customer edit", customers_my_page_edit_path, class: "btn btn-light w-50" %>
+        </div>
+
+        <div class="col-3">
+          <%= link_to "Cart", cart_items_path, class: "btn btn-light w-50" %>
+          </div>
+
+        <div class="col-3">
+          <%= link_to "Your order index", orders_path, class: "btn btn-light w-50" %>
+          </div>
+
+        <div class="col-3">
+          <%= link_to "New address", addresses_path, class: "btn btn-light w-50" %>
+        </div>
+      </div>
+
     </div>
   </main>
   <%= render 'layouts/footer_template' %>

@@ -44,9 +44,19 @@ class Public::OrdersController < ApplicationController
     @order.customer_id = current_customer.id
     @order.shipping_cost = 800
     # @order.grand_total = params[:order][:grand_total].to_i
-    binding.pry
+    # binding.pry
     @order.save
-    redirect_to orders_path
+    # order_itemの作成
+    cart_items = current_customer.cart_items
+    cart_items.each do |cart_item|
+      order_item = OrderItem.new
+      order_item.order_id = @order.id
+      order_item.item_id = cart_item.item_id
+      order_item.purchase_price = cart_item.subtotal
+      order_item.amount = cart_item.amount
+      order_item.save!
+    end
+    redirect_to orders_complete_path
   end
 
   def complete
@@ -57,7 +67,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-    # @order = current_customer.order.find(:id)
+    @order = current_customer.orders.find(params[:id])
+    @order_items = @order.order_items
   end
 
   private

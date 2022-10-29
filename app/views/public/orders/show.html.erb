@@ -1,2 +1,68 @@
-<h1>Public::Orders#show</h1>
-<p>Find me in app/views/public/orders/show.html.erb</p>
+<body>
+  <%= render 'layouts/public_header_template' %>
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col-3 ml-auto">
+          <%= link_to "ご注文一覧", orders_path, class: "btn btn-light btn-block" %>
+        </div>
+      </div>
+      <h1 class="mb-5">ご注文内容</h1>
+      <div class="row">
+        <div class="col-10">
+          <table class="table mb-3">
+            <tbody>
+              <tr>
+                <td>ご注文番号</td>
+                <th><%= @order.id %></th>
+              </tr>
+              <tr>
+                <td>宛名</td>
+                <th><%= @order.name %></th>
+              </tr>
+              <tr>
+                <td>お届け先郵便番号</td>
+                <th><%= @order.postal_code %></th>
+              </tr>
+              <tr>
+                <td>お届け先住所</td>
+                <th><%= @order.address %></t>
+              </tr>
+              <tr>
+                <td>ご請求金額</td>
+                <th>
+                  <%= @order.grand_total %>（送料込み）</th>
+              </tr>
+              <tr>
+                <td>お支払い方法</td>
+                <th><%= @order.payment_method %></th>
+              </tr>
+              <tr>
+                <td>ステータス(本当はAdminのみ)</td>
+                <th><%= @order.order_status %></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-4">
+          <h3>ご注文商品一覧</h3>
+          <table class="table">
+            <tbody>
+              <% @order_items.each do |order_item| %>
+              <tr>
+                <td><%= order_item.item.name %>：</td>
+                <td><%= order_item.amount %> 個</td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <%= render 'layouts/footer_template' %>
+</body>
