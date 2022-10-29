@@ -25,7 +25,6 @@ class Public::CartItemsController < ApplicationController
   end
 
   def update
-    #indexだから:idで引っ張れない！
     cart_item = current_customer.cart_items.find(params[:id])
     # @cart_item.amount = params[:@cart_item][:amount]
     # @cart_item.customer_id = current_customer.id

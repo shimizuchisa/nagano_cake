@@ -5,9 +5,31 @@
       <h1>注文一覧</h1>
       <div class="row">
         <div class="col-10">
-          
+          <div class="order_field mb-3">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ご注文日時</th>
+                  <th>宛名</th>
+                  <th>ご請求金額</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @orders.each do |order| %>
+                <tr>
+                  <td><%= order.created_at %></td>
+                  <td><%= order.address %></td>
+                  <td><%= order.grand_total %></td>
+                  <td><%= link_to "ご注文詳細", edit_admin_order_path(order), class: "btn btn-light" %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
   </main>
+  <%= render 'layouts/footer_template' %>
 </body>

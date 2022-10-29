@@ -7,8 +7,12 @@ class Admin::OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    @order.update(order_status: params[:order_status])
-    redirect_to root_path
+    @order.update(order_params)
+    redirect_to admin_root_path
+  end
+
+  def order_params
+    params.require(:order).permit(:order_status)
   end
 
 end

@@ -3,19 +3,80 @@
   <%= render 'layouts/admin_header_template' %>
   <main>
     <div class="container">
+      <h1>注文詳細</h1>
       <div class="row">
-        <h1>注文詳細</h1>
+        <div class="col-10">
+          <table class="table mb-3">
+            <tbody>
+              <tr>
+                <td>ご注文番号</td>
+                <td><%= @order.id %></td>
+              </tr>
+              <tr>
+                <td>宛名</td>
+                <td><%= @order.name %></td>
+              </tr>
+              <tr>
+                <td>お届け先郵便番号</td>
+                <td><%= @order.postal_code %></td>
+              </tr>
+              <tr>
+                <td>お届け先住所</td>
+                <td><%= @order.address %></td>
+              </tr>
+              <tr>
+                <td>ご請求金額</td>
+                <td>
+                  <%= @order.grand_total %>（送料込み）</td>
+              </tr>
+              <tr>
+                <td>お支払い方法</td>
+                <td><%= @order.payment_method %></td>
+              </tr>
+              <tr>
+                <td>ステータス</td>
+                <td>
+                  <%= form_with model: @order, url: admin_order_path(@order), method: :patch do |f| %>
+                    <%= f.select :order_status, Order.order_statuses.keys %>
+                    <%= f.submit "ステータス更新", class: "btn btn-primary" %>
+                  <% end %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
+      <h1 class="mt-5">注文商品一覧</h1>
+      <div class="row">
+        <div class="col-10">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>商品名</th>
+                  <th>数量</th>
+                  <th>ステータス</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @order_items.each do |order_item| %>
+                <tr>
+                  <th><%= order_item.item.name %></th>
+                  <th><%= order_item.amount %></th>
+                  <th>
+                    <%= form_with model: order_item, url: admin_order_item_path(order_item), method: :patch do |f| %>
+                      <%= f.select :making_status, OrderItem.making_statuses.keys %>
 
-        <div class="col-md-5">
-          <%= order.id %>
-          <%= order.order_status %>
-
-        <% @order_items.each do |order_item| %>
-          <%= order_item.item.name %>
-          <%= order_item.amount %>
-          <%= order_item.making_status %>
-        <% end %>
+                  </th>
+                  <th><%= f.submit "ステータス更新", class: "btn btn-primary" %>
+                    <% end %>
+                  </th>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+        </div>
       </div>
     </div>
   </main>
