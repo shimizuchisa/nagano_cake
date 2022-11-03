@@ -3,42 +3,33 @@
   <%= render 'layouts/admin_header_template' %>
   <main>
     <div class="container">
-      <h1>注文詳細</h1>
+      <h1>注文履歴詳細</h1>
       <div class="row">
         <div class="col-10">
           <table class="table mb-3">
             <tbody>
               <tr>
-                <td>ご注文番号</td>
-                <td><%= @order.id %></td>
+                <td>購入者</td>
+                <td><%= @order.customer.last_name %><%= @order.customer.first_name %></td>
               </tr>
               <tr>
-                <td>宛名</td>
-                <td><%= @order.name %></td>
+                <td>注文日</td>
+                <td><%= @order.created_at %></td>
               </tr>
               <tr>
-                <td>お届け先郵便番号</td>
-                <td><%= @order.postal_code %></td>
+                <td>配送先</td>
+                <td><%= @order.address_display %></td>
               </tr>
               <tr>
-                <td>お届け先住所</td>
-                <td><%= @order.address %></td>
-              </tr>
-              <tr>
-                <td>ご請求金額</td>
-                <td>
-                  <%= @order.grand_total %>（送料込み）</td>
-              </tr>
-              <tr>
-                <td>お支払い方法</td>
+                <td>支払い方法</td>
                 <td><%= @order.payment_method %></td>
               </tr>
               <tr>
-                <td>ステータス</td>
+                <td>注文ステータス</td>
                 <td>
                   <%= form_with model: @order, url: admin_order_path(@order), method: :patch do |f| %>
                     <%= f.select :order_status, Order.order_statuses.keys %>
-                    <%= f.submit "ステータス更新", class: "btn btn-primary" %>
+                    <%= f.submit "更新", class: "btn btn-success" %>
                   <% end %>
                 </td>
               </tr>
@@ -54,24 +45,27 @@
               <thead>
                 <tr>
                   <th>商品名</th>
+                  <th>単価（税込）</th>
                   <th>数量</th>
-                  <th>ステータス</th>
+                  <th>小計</th>
+                  <th>制作ステータス</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 <% @order_items.each do |order_item| %>
                 <tr>
-                  <th><%= order_item.item.name %></th>
-                  <th><%= order_item.amount %></th>
-                  <th>
+                  <td><%= order_item.item.name %></td>
+                  <td><%= (order_item.item.price * 1.1).floor %></td>
+                  <td><%= order_item.amount %></td>
+                  <td><%= (order_item.item.price * 1.1).floor * order_item.amount %></td>
+                  <td>
                     <%= form_with model: order_item, url: admin_order_item_path(order_item), method: :patch do |f| %>
                       <%= f.select :making_status, OrderItem.making_statuses.keys %>
-
-                  </th>
-                  <th><%= f.submit "ステータス更新", class: "btn btn-primary" %>
+                  </td>
+                  <td><%= f.submit "更新", class: "btn btn-success" %>
                     <% end %>
-                  </th>
+                  </td>
                 </tr>
                 <% end %>
               </tbody>

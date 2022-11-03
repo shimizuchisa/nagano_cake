@@ -10,18 +10,28 @@
               <thead>
                 <tr>
                   <th>ご注文日時</th>
-                  <th>宛名</th>
-                  <th>ご請求金額</th>
-                  <th></th>
+                  <th>購入者</th>
+                  <th>注文個数</th>
+                  <th>注文ステータス</th>
                 </tr>
               </thead>
               <tbody>
                 <% @orders.each do |order| %>
                 <tr>
-                  <td><%= order.created_at %></td>
-                  <td><%= order.address %></td>
-                  <td><%= order.grand_total %></td>
-                  <td><%= link_to "ご注文詳細", edit_admin_order_path(order), class: "btn btn-light" %></td>
+                  <td>
+                    <%= link_to(edit_admin_order_path(order)) do %>
+                      <%= order.created_at %>
+                    <% end %>
+                  </td>
+                  <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
+                  <td>
+                    <% order.order_items.each do |order_item| %>
+                      <% @total_amount += order_item.amount %>
+                    <% end %>
+                    <%= @total_amount %>
+                  </td>
+                  <td>
+                    <%= order.order_status_i18n %></td>
                 </tr>
                 <% end %>
               </tbody>

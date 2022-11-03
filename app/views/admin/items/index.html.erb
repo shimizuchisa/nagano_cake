@@ -15,27 +15,29 @@
             <table class="table table-hover">
               <thead class="table-secondary">
                 <tr>
+                  <th style="width: 20%">商品ID</th>
                   <th style="width: 20%">商品名</th>
-                  <th style="width: 20%">image</th>
-                  <th style="width: 20%">価格（税抜）</th>
+                  <th style="width: 20%">税抜価格</th>
+                  <th style="width: 20%">ジャンル</th>
                   <th style="width: 20%">ステータス</th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 <% @cakes.each do |cake| %>
                 <tr>
-                  <td><%= cake.name %></td>
-                  <td><%= image_tag cake.get_image(100, 100) %></td>
-                  <td><%= cake.price %></td>
+                  <td><%= cake.id %></td>
                   <td>
-                    <% if cake.is_active == true %>
-                      <%= "販売中" %>
-                    <% else %>
-                      <%= "準備中" %>
+                    <%= link_to(admin_item_path(cake.id)) do %>
+                      <%= cake.name %>
                     <% end %>
                   </td>
-                  <td><%= link_to "Show", (admin_item_path(cake.id)),class: "btn btn-success" %></td>
+                  <td><%= cake.price %></td>
+                  <td><%= cake.genre.genre_name %></td>
+                  <% if cake.is_active == true %>
+                    <td class="text-success fw-bold">販売中</td>
+                  <% else %>
+                    <td class="text-secondary">販売停止中</td>
+                  <% end %>
                 </tr>
                 <% end %>
               </tbody>

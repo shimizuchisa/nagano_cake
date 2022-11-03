@@ -14,32 +14,36 @@
             <tbody>
               <tr>
                 <td>ご注文番号</td>
-                <th><%= @order.id %></th>
+                <td><%= @order.id %></td>
+              </tr>
+              <tr>
+                <td>ご注文日時</td>
+                <td><%= @order.created_at %></td>
               </tr>
               <tr>
                 <td>宛名</td>
-                <th><%= @order.name %></th>
+                <td><%= @order.name %></td>
               </tr>
               <tr>
                 <td>お届け先郵便番号</td>
-                <th><%= @order.postal_code %></th>
+                <td><%= @order.postal_code %></td>
               </tr>
               <tr>
                 <td>お届け先住所</td>
-                <th><%= @order.address %></t>
+                <td><%= @order.address %></td>
               </tr>
               <tr>
                 <td>ご請求金額</td>
-                <th>
-                  <%= @order.grand_total %>（送料込み）</th>
+                <td>
+                  <%= @order.grand_total %> 円（送料込み）</td>
               </tr>
               <tr>
                 <td>お支払い方法</td>
-                <th><%= @order.payment_method %></th>
+                <td><%= @order.payment_method %></td>
               </tr>
               <tr>
-                <td>ステータス(本当はAdminのみ)</td>
-                <th><%= @order.order_status %></th>
+                <td>ステータス</td>
+                <td><%= @order.order_status %></td>
               </tr>
             </tbody>
           </table>
@@ -55,6 +59,8 @@
               <tr>
                 <td><%= order_item.item.name %>：</td>
                 <td><%= order_item.amount %> 個</td>
+                <td><%= order_item.item.price %> 円（税込）</td>
+                <td><%= order_item.itemsubtotal %></td>
               </tr>
               <% end %>
             </tbody>
