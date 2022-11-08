@@ -2,9 +2,20 @@
   <%= render 'layouts/public_header_template' %>
   <main>
     <div class="container">
-      <h1 class="mx-auto">店舗紹介</h1>
+      <div class="row text-center">
+        <h1 class="mx-auto">About</h1>
+      </div>
+      <div class="row">
+          <P class="mx-auto text-center">ながのCAKEは全国発送可能中ケーキ屋産です<br>
+             お子様からお年寄りの方までお召し上がりいただけるよう、<br>
+             様々なバリエーションをご用意しております。<br>
+             また、全国へ発送可能ですので、「いつ」でも「どこ」でもごちゅうもんいただけます。<br>
+             ぜひご注文ください。
+          </P>
+      </div>
+
       <div class="row mt-5">
-        <div class="mx-auto col-10">
+        <div class="col-10 mx-auto">
           <h4>電話番号</h4>
           <p>03-1234-5678</p>
           <h4 class="mt-5">メールアドレス</h4>
@@ -16,6 +27,7 @@
           <p>〇〇駅より徒歩５分</p>
         </div>
       </div>
+    </div>
   </main>
   <%= render 'layouts/footer_template' %>
 </body>

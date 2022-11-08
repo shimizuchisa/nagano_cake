@@ -2,43 +2,26 @@
   <%= render 'layouts/public_header_template' %>
   <main>
     <div class="container">
-      <div class="row">
-        <div class="col-3 ml-auto">
-          <%= link_to "ご注文一覧", orders_path, class: "btn btn-light btn-block" %>
-        </div>
-      </div>
-      <h1 class="mb-5">ご注文内容</h1>
-      <div class="row">
-        <div class="col-10">
-          <table class="table mb-3">
+      <h1 class="mb-5">注文履歴詳細</h1>
+      <div class="row mt-5">
+        <div class="col-7">
+          <h3 class="">注文情報</h3>
+          <table class="table mt-3">
             <tbody>
               <tr>
-                <td>ご注文番号</td>
-                <td><%= @order.id %></td>
-              </tr>
-              <tr>
-                <td>ご注文日時</td>
+                <td>注文日</td>
                 <td><%= @order.created_at %></td>
               </tr>
               <tr>
-                <td>宛名</td>
-                <td><%= @order.name %></td>
-              </tr>
-              <tr>
-                <td>お届け先郵便番号</td>
-                <td><%= @order.postal_code %></td>
-              </tr>
-              <tr>
-                <td>お届け先住所</td>
-                <td><%= @order.address %></td>
-              </tr>
-              <tr>
-                <td>ご請求金額</td>
+                <td>配送先</td>
                 <td>
-                  <%= @order.grand_total %> 円（送料込み）</td>
+                  〒<%= @order.postal_code %><br>
+                  <%= @order.address %><br>
+                  <%= @order.name %>
+                </td>
               </tr>
               <tr>
-                <td>お支払い方法</td>
+                <td>支払方法</td>
                 <td><%= @order.payment_method %></td>
               </tr>
               <tr>
@@ -48,19 +31,49 @@
             </tbody>
           </table>
         </div>
+
+
+        <div class="offset-1 col-4">
+          <h3 class="">請求情報</h3>
+          <table class="table mt-3">
+            <tbody>
+              <tr>
+                <td>商品合計</td>
+                <td><%= @order.name %></td>
+              </tr>
+              <tr>
+                <td>配送料</td>
+                <td><%= @order.shipping_cost %></td>
+              </tr>
+              <tr>
+                <td>ご請求額</td>
+                <td>
+                  <%= @order.grand_total %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div class="row mt-5">
-        <div class="col-4">
-          <h3>ご注文商品一覧</h3>
+        <div class="col-7">
+          <h3>注文内容</h3>
           <table class="table">
+            <thead class="table-light">
+              <tr>
+                <th>商品</th>
+                <th>単価(税込)</th>
+                <th>個数</th>
+                <th>小計</th>
+              </tr>
+            </thead>
             <tbody>
               <% @order_items.each do |order_item| %>
               <tr>
                 <td><%= order_item.item.name %>：</td>
+                <td><%= order_item.item.with_tax_price %> 円（税込）</td>
                 <td><%= order_item.amount %> 個</td>
-                <td><%= order_item.item.price %> 円（税込）</td>
-                <td><%= order_item.itemsubtotal %></td>
+                <td><%= order_item.amount * order_item.item.with_tax_price %></td>
               </tr>
               <% end %>
             </tbody>

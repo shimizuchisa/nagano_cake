@@ -3,9 +3,7 @@
   <%= render 'layouts/public_header_template' %>
   <main>
     <div class="container">
-      <div class="row">
-        <h1 class="mb-5"><%= @item.name %></h1>
-      </div>
+
       <div class="row">
         <div class="col-6">
           <div>
@@ -14,25 +12,21 @@
         </div>
 
         <div class="col-6">
-          <p>introduction：<%= @item.introduction %></p>
-          <p>価格（税抜）：<%= @item.price %></p>
+          <h3 class="mb-5"><%= @item.name %></h3>
+          <p><%= @item.introduction %></p>
+          <p>¥ <%= @item.price %>(税込)</p>
           <div class="field">
             <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
               <div class="form-group">
                 <%= f.hidden_field :item_id, value: @item.id %>
               </div>
-              <div class="form-group">
-                <%= f.label :amount, "数量" %>
-                <%= f.select :amount, *[1..10] %>
-              </div>
-              <div class="form-action">
-                <%= f.submit "カートに入れる", class: "btn btn-success w-50" %>
+              <div class="form-inline">
+                <%= f.select :amount, *[1..10], {include_blank: '選択してください'} %>
+                <%= f.submit "カートに入れる", class: "btn btn-success w-25 ml-3" %>
               </div>
             <% end %>
           </div>
         </div>
-      <div class="row">
-        <%= link_to "index", items_path, class: "ml-auto mt-5 btn btn-success" %>
       </div>
     </div>
   </main>

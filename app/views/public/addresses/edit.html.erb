@@ -1,30 +1,29 @@
-<div class="container">
+<body>
   <%= render 'layouts/public_header_template' %>
-
-  <div class="row">
-    <h1>Public::Addresses#edit</h1>
-
-    <div class="col-md-10">
-      <div class="field">
+  <main>
+    <div class="container">
+    <h1>配送先編集</h1>
+      <div class="row mt-5">
+        <div class="col-md-10">
+          <div class="form-group">
         <%= form_with model: @address, url: address_path(@address.id), method: :patch do |f| %>
-          <div class="form-group">
-            <%= f.label :name, "宛名" %>
-            <%= f.text_field :name, class: "form-control"%>
+          <div class="form-inline">
+            <%= f.label :postal_code, "郵便番号(ハイフンなし)", class: "col-4 justify-content-start mr-3" %>
+            <%= f.text_field :postal_code, class: "form-control w-25" %>
           </div>
 
-          <div class="form-group">
-            <%= f.label :postal_code, "郵便番号" %>
-            <%= f.text_field :postal_code, class: "form-control"%>
+          <div class="form-inline mt-3">
+            <%= f.label :address, "配送先", class: "col-4 justify-content-start mr-3" %>
+            <%= f.text_field :address, class: "form-control w-50" %>
           </div>
 
-          <div class="form-group">
-            <%= f.label :address, "配送先" %>
-            <%= f.text_field :address, class: "form-control"%>
+          <div class="form-inline mt-3">
+            <%= f.label :name, "宛名", class: "col-4 justify-content-start mr-3" %>
+            <%= f.text_field :name, class: "form-control w-25" %>
+            <%= f.submit "変更内容を保存", class: "btn btn-success ml-auto" %>
           </div>
-
-          <div class="form-group">
-            <%= f.submit "Update", class: "btn btn-success" %>
-          </div>
-
         <% end %>
-      </div>
+    </div>
+  </main>
+  <%= render 'layouts/footer_template' %>
+</body>

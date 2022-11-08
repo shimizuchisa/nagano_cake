@@ -2,64 +2,55 @@
   <%= render 'layouts/public_header_template' %>
   <main>
 
-<div class="container">
-
-
-  <div class="row">
-    <h1 class="mb-5">配送先登録</h1>
-
-    <div class="col-md-10">
-      <div class="field">
-        <%= form_with model: @address, url: addresses_path do |f| %>
-          <div class="form-group">
-            <%= f.label :name, "宛名" %>
-            <%= f.text_field :name, class: "form-control"%>
+    <div class="container">
+      <h1 class="mb-5">配送先登録/一覧</h1>
+      <div class="row">
+        <div class="col-8">
+          <%= form_with model: @address, url: addresses_path do |f| %>
+          <div class="form-inline">
+            <%= f.label :postal_code, "郵便番号(ハイフンなし)", class: "col-4 justify-content-start" %>
+            <%= f.text_field :postal_code, class: "form-control w-25"%>
           </div>
 
-          <div class="form-group">
-            <%= f.label :postal_code, "郵便番号" %>
-            <%= f.text_field :postal_code, class: "form-control"%>
+          <div class="form-inline mt-3">
+            <%= f.label :address, "住所", class: "col-4 justify-content-start" %>
+            <%= f.text_field :address, class: "form-control w-50" %>
           </div>
 
-          <div class="form-group">
-            <%= f.label :address, "配送先" %>
-            <%= f.text_field :address, class: "form-control"%>
+          <div class="form-inline mt-3">
+            <%= f.label :name, "宛名", class: "col-4 justify-content-start" %>
+            <%= f.text_field :name, class: "form-control w-25" %>
+            <%= f.submit "新規登録", class: "btn btn-success ml-auto" %>
           </div>
-
-          <div class="form-group">
-            <%= f.submit "Create", class: "btn btn-success" %>
-          </div>
-
-        <% end %>
+          <% end %>
+        </div>
       </div>
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th>宛名</th>
-            <th>郵便番号</th>
-            <th>配送先</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @addresses.each do |address| %>
-          <tr>
-            <td><%= address.name %></td>
-            <td><%= address.postal_code %></td>
-            <td><%= address.address %></td>
-            <td>
-              <%= link_to "修正", edit_address_path(address.id), class: "btn btn-success" %>
-            </td>
-            <td><%= link_to "削除", address_path(address.id), method: :delete, class: "btn btn-danger" %> </td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <div class="row mt-5">
+        <table class="table table-bordered border-dark">
+          <thead class="table-light">
+            <tr>
+              <th>郵便番号</th>
+              <th>住所</th>
+              <th>宛名</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @addresses.each do |address| %>
+            <tr>
+              <td><%= address.postal_code %></td>
+              <td><%= address.address %></td>
+              <td><%= address.name %></td>
+              <td>
+                <%= link_to "編集する", edit_address_path(address.id), class: "btn btn-success mr-2" %>
+                <%= link_to "削除する", address_path(address.id), method: :delete, class: "btn btn-danger" %> </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-</div>
   </main>
   <%= render 'layouts/footer_template' %>
 </body>
