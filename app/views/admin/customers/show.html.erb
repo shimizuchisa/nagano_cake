@@ -51,33 +51,12 @@
       </div>
 
       <div class="row">
-        <div class="col-5 offset-5 d-flex">
+        <div class="col-5 offset-4 d-flex">
             <div class="d-inline"><%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success" %></div>
             <div class="d-inline ml-5"><%= link_to "注文履歴一覧を見る", edit_admin_customer_path(@customer.id), class: "btn btn-primary ml-6" %></div>
         </div>
       </div>
-
-        <h2 class="mt-5">注文履歴</h2>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>注文ID</th>
-              <th>注文ステータス</th>
-              <th>更新日時</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>#</td>
-              <td>#</td>
-              <td>#</td>
-            </tr>
-          </tbody>
-        </table>
-
-      </div>
     </div>
-  </div>
   </main>
   <%= render 'layouts/footer_template' %>
 </body>

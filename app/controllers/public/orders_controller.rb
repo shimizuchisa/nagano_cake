@@ -7,6 +7,11 @@ class Public::OrdersController < ApplicationController
   def confirm
     @cart_items = current_customer.cart_items
     @total = 0
+    @cart_items.each do |cart_item|
+      sub_total = cart_item.amount * cart_item.item.with_tax_price
+      @total += sub_total
+    end
+
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.shipping_cost = 800
@@ -69,6 +74,11 @@ class Public::OrdersController < ApplicationController
   def show
     @order = current_customer.orders.find(params[:id])
     @order_items = @order.order_items
+    @order_items.each do |order_item|
+      @total = 0
+      sub_total = order_item.amount * order_item.item.with_tax_price
+      @total += sub_total
+    end
   end
 
   private

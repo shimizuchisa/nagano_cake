@@ -8,6 +8,15 @@ class Order < ApplicationRecord
     "〒" + postal_code + ' ' + address + ' ' + name
   end
 
+  # def item_total
+    # @total = 0
+    # current_customer.cart_items.each do |cart_item|
+      # sub_total = cart_item.amount * cart_item.item.with_tax_price
+      # @total += sub_total
+    # end
+    # return @total
+  # end
+
   # def subtotal (cart_itemのmodel)
     # item.with_tax_price * amount
   # end
