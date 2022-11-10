@@ -2,6 +2,7 @@
   <%= render 'layouts/admin_header_template'%>
   <main>
     <div class="container">
+      <%= render 'layouts/flash' %>
       <h1 class="mb-5"><%= @customer.last_name %><%= @customer.first_name %> さんの会員詳細</h1>
       <div class="row">
         <div class="col-md-10">

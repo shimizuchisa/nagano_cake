@@ -27,11 +27,9 @@
           </table>
         </div>
 
-
-
-        <div class="col-8 offset-1">
-          <div class="row">
-            <div class="top_image">
+        <div class="col-8 offset-1 mt-5 p-0">
+          <div class="main-visual d-flex align-items-center">
+            <div class="main-visual-content w-50 mx-auto">
               <P>ようこそながのCAKEへ！<br>
                  このサイトは、ケーキ販売のECサイトになります。<br>
                  会員でない方も商品の閲覧はできますが、<br>
@@ -40,30 +38,28 @@
             </div>
           </div>
 
+          <h1 class="mt-5">新着商品</h1>
+
+          <div class="new_item d-flex">
+            <% @items.each do |item| %>
+            <% if item.is_active == true %>
+            <div class="card d-inline-flex mr-3" style="width: 25%;">
+              <%= image_tag item.get_image(100, 100), class: "card-img-top" %>
+              <div class="card-body">
+                <%= link_to(item_path(item.id)) do %>
+                  <h5 class="card-title"><%= item.name %></h5>
+                <% end %>
+                <p class="card-text">¥<%= item.price.to_s(:delimited) %>円</p>
+              </div>
+            </div>
+            <% end %>
+            <% end %>
+          </div>
+
           <div class="row mt-5">
-            <div>
-              <h1>新着商品</h1>
-            </div>
-
-            <div class="new_item d-flex">
-              <div class="d-inline">
-                <span>¥%= @item.price %></span>
-              </div>
-              <div class="d-inline">
-                <span>¥%= @item.price %></span>
-              </div>
-              <div class="d-inline">
-                <span>¥%= @item.price %></span>
-              </div>
-              <div class="d-inline">
-                <span>¥%= @item.price %></span>
-              </div>
-            </div>
-
             <div class="col-3 ml-auto">
               <%= link_to "全ての商品を見る＞", items_path %>
             </div>
-
           </div>
         </div>
 
@@ -72,3 +68,12 @@
   </main>
   <%= render 'layouts/footer_template' %>
 </body>
+
+<style>
+.main-visual {
+  width: 100%; /* 横幅いっぱい */
+  height: 500px;
+  background-image: url("<%= asset_path('top.jpg') %>");
+  background-size: cover;
+}
+</style>

@@ -1,69 +1,80 @@
 <!--nagano_cake admin/customer/edit-->
 <body>
   <main>
-  <%= render 'layouts/admin_header_template' %>
+    <%= render 'layouts/admin_header_template' %>
+
+    <% if @customer.errors.any? %>
+    <div id="error_explanation">
+        <h2><%= pluralize(@customer.errors.count, "error") %>prohibited this obj from being saved:</h2>
+        <ul>
+        <% @customer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+    </div>
+    <% end %>
 
     <div class="container">
-    <div class="row">
-      <h1 class="mb-5"><%= @customer.last_name %><%= @customer.first_name %> さんの会員情報編集</h1>
-      <div class="col-md-10">
-        <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch do |f| %>
-        <div class="form-group">
-          <div class="form-inline mb-5">
-            <%= f.label :id, "会員ID", class: "col-sm-2 justify-content-start" %>
-            <%= @customer.id %>
-          </div>
+      <div class="row">
+        <h1 class="mb-5"><%= @customer.last_name %><%= @customer.first_name %> さんの会員情報編集</h1>
+        <div class="col-md-10">
+          <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch do |f| %>
+          <div class="form-group">
+            <div class="form-inline mb-5">
+              <%= f.label :id, "会員ID", class: "col-sm-2 justify-content-start" %>
+              <%= @customer.id %>
+            </div>
 
-          <div class="form-inline mb-5">
-            <%= f.label :name, "氏名", class: "col-sm-2 justify-content-start" %>
-            <%= f.text_field :last_name, class: "form-control mr-3" %>
-            <%= f.text_field :first_name, class: "form-control" %>
-          </div>
+            <div class="form-inline mb-5">
+              <%= f.label :name, "氏名", class: "col-sm-2 justify-content-start" %>
+              <%= f.text_field :last_name, class: "form-control mr-3" %>
+              <%= f.text_field :first_name, class: "form-control" %>
+            </div>
 
-          <div class="form-inline mb-5">
-          <%= f.label :last_name_kana, "フリガナ", class: "col-sm-2 justify-content-start" %>
-          <%= f.text_field :last_name_kana, class: "form-control mr-3" %>
-          <%= f.text_field :first_name_kana, class: "form-control" %>
-          </div>
+            <div class="form-inline mb-5">
+              <%= f.label :last_name_kana, "フリガナ", class: "col-sm-2 justify-content-start" %>
+              <%= f.text_field :last_name_kana, class: "form-control mr-3" %>
+              <%= f.text_field :first_name_kana, class: "form-control" %>
+            </div>
 
 
-          <div class="form-inline mb-5">
-          <%= f.label :postal_code, "郵便番号", class: "col-sm-2 justify-content-start" %><br />
-          <%= f.text_field :postal_code, class: "form-control" %>
-          </div>
+            <div class="form-inline mb-5">
+              <%= f.label :postal_code, "郵便番号", class: "col-sm-2 justify-content-start" %><br />
+              <%= f.text_field :postal_code, class: "form-control" %>
+            </div>
 
-          <div class="form-inline mb-5">
-          <%= f.label :address, "住所", class: "col-sm-2 justify-content-start" %><br />
-          <%= f.text_area :address, class: "form-control w-75" %>
-          </div>
+            <div class="form-inline mb-5">
+              <%= f.label :address, "住所", class: "col-sm-2 justify-content-start" %><br />
+              <%= f.text_area :address, class: "form-control w-75" %>
+            </div>
 
-          <div class="form-inline mb-5">
-          <%= f.label :telephone_number, "電話番号", class: "col-sm-2 justify-content-start" %><br />
-          <%= f.text_field :telephone_number, class: "form-control" %>
-          </div>
+            <div class="form-inline mb-5">
+              <%= f.label :telephone_number, "電話番号", class: "col-sm-2 justify-content-start" %><br />
+              <%= f.text_field :telephone_number, class: "form-control" %>
+            </div>
 
-          <div class="form-inline mb-5">
-          <%= f.label :email, "メールアドレス", class: "col-sm-2 justify-content-start" %>
-          <%= f.email_field :email, class: "form-control w-75" %>
-          </div>
+            <div class="form-inline mb-5">
+              <%= f.label :email, "メールアドレス", class: "col-sm-2 justify-content-start" %>
+              <%= f.email_field :email, class: "form-control w-75" %>
+            </div>
 
-          <div class="form-inline mb-5">
-            <%= f.label :is_deleted, "会員ステータス", class: "col-sm-2 justify-content-start" %><br>
-            <%= f.radio_button :is_deleted, false %>
-            <%= f.label :is_deleted, "有効", value: "false", class: "mr-3"  %><br>
-            <%= f.radio_button :is_deleted, true %>
-            <%= f.label :is_deleted, "退会", value: "true" %>
-          </div>
+            <div class="form-inline mb-5">
+              <%= f.label :is_deleted, "会員ステータス", class: "col-sm-2 justify-content-start" %><br>
+              <%= f.radio_button :is_deleted, false %>
+              <%= f.label :is_deleted, "有効", value: "false", class: "mr-3"  %><br>
+              <%= f.radio_button :is_deleted, true %>
+              <%= f.label :is_deleted, "退会", value: "true" %>
+            </div>
 
-          <div class="col-3 offset-2">
-            <%= f.submit "変更を保存", class: "btn btn-success btn-lg" %>
+            <div class="col-3 offset-2">
+              <%= f.submit "変更を保存", class: "btn btn-success btn-lg" %>
+            </div>
           </div>
+          <% end %>
         </div>
-        <% end %>
       </div>
     </div>
   </div>
-</div>
 </main>
  <%= render 'layouts/footer_template' %>
 </body>

@@ -8,6 +8,18 @@ class Customer < ApplicationRecord
   has_many :cart_items
   has_many :orders
 
+  with_options presence: true do
+    validates :last_name
+    validates :first_name
+    validates :last_name_kana
+    validates :first_name_kana
+    validates :email
+    validates :encrypted_password
+    validates :postal_code
+    validates :address
+    validates :telephone_number
+  end
+
   def address_display
     "〒" + postal_code + ' ' + address
   end
