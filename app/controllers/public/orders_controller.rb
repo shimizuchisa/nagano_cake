@@ -15,6 +15,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.shipping_cost = 800
+    @order.grand_total = @order.shipping_cost + @total
     # @order.grand_total = total.to_i + @order.shipping_cost.to_i
     # total = 0
     # cart_items = current_customer.cart_items
@@ -61,6 +62,7 @@ class Public::OrdersController < ApplicationController
       order_item.amount = cart_item.amount
       order_item.save!
     end
+    cart_items.destroy_all
     redirect_to orders_complete_path
   end
 

@@ -4,6 +4,13 @@ class Item < ApplicationRecord
   has_many :cart_items
   has_many :order_items
 
+  with_options presence: true do
+    validates :genre_id
+    validates :name
+    validates :introduction
+    validates :price
+  end
+
   def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_icon.jpeg')

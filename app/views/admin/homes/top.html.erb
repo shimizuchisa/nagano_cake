@@ -24,14 +24,12 @@
                     <% end %>
                   </td>
                   <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
-                  <td>
-                    <% order.order_items.each do |order_item| %>
-                      <% @total_amount += order_item.amount %>
-                    <% end %>
-                    <%= @total_amount %>
-                  </td>
-                  <td>
-                    <%= order.order_status_i18n %></td>
+                  <% total_amount = 0 %>
+                  <% order.order_items.each do |order_item| %>
+                  <% total_amount += order_item.amount %>
+                  <% end %>
+                  <td><%= total_amount %></td>
+                  <td><%= order.order_status_i18n %></td>
                 </tr>
                 <% end %>
               </tbody>
@@ -39,7 +37,11 @@
           </div>
         </div>
       </div>
-      <%= paginate @orders, class: "pagination" %>
+
+      <div class: "justify-content-center">
+        <%= paginate @orders %>
+      </div>
+
     </div>
   </main>
   <%= render 'layouts/footer_template' %>

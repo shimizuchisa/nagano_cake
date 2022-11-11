@@ -18,7 +18,6 @@ class Admin::CustomersController < ApplicationController
       flash[:notice] = "更新が完了しました。"
     else
       render 'edit'
-      flash[:alert] = "失敗"
     end
   end
 

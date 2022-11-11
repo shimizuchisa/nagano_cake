@@ -33,7 +33,7 @@
                       <%= cake.name %>
                     <% end %>
                   </td>
-                  <td><%= cake.price %></td>
+                  <td><%= cake.price.to_s(:delimited) %></td>
                   <td><%= cake.genre.genre_name %></td>
                   <% if cake.is_active == true %>
                     <td class="text-success fw-bold">販売中</td>

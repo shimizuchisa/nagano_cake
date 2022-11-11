@@ -7,8 +7,11 @@ class Admin::ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.is_active = true
-    @item.save
-    redirect_to admin_item_path(@item)
+    if @item.save
+      redirect_to admin_item_path(@item)
+    else
+      render 'new'
+    end
   end
 
   def index
@@ -28,8 +31,13 @@ class Admin::ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    @item.update(item_params)
-    admin_item_path(@item)
+    if @item.update(item_params)
+      redirect_to admin_item_path(@item)
+    else
+      @item = Item.find(params[:id])
+      render 'edit'
+      flash[:notice] = "更新が完了しました"
+    end
   end
 
   private
