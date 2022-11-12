@@ -11,24 +11,11 @@ class Public::OrdersController < ApplicationController
       sub_total = cart_item.amount * cart_item.item.with_tax_price
       @total += sub_total
     end
-
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.shipping_cost = 800
     @order.grand_total = @order.shipping_cost + @total
-    # @order.grand_total = total.to_i + @order.shipping_cost.to_i
-    # total = 0
-    # cart_items = current_customer.cart_items
-    # cart_items.each do |cart_item|
-      # price = cart_item.item.price
-      # amount = cart_item.amount
-      # subtotal = price * amount
-      # total += subtotal
-    # end
-    # @order.grand_total = total + @order.shipping_cost.to_i
-
-    @order.payment_method = params[:order][:payment_method].to_i
-    #@order_items = current_customer.order_items
+    @order.payment_method = params[:order][:payment_method] #stringなので.to_iはいらない
     if params[:order][:address_select] == "0"
       #自身の住所
       @order.name = current_customer.first_name + current_customer.last_name

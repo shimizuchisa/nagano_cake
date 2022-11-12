@@ -4,28 +4,19 @@ ja: # 日本語の設定を行う
       payment_method: # カラム名（payment_methodカラムに対して）
         credit_card: "クレジットカード"
         transfer: "銀行振込"
-
-ja: # 日本語の設定を行う
-  enums: # enumの設定を行う
-    order:
       order_status:
         pending: "入金待ち"
         payment_confirmation: "入金確認"
         making: "制作中"
         preparing_shipment: "発送準備中"
         completed: "発送済み"
-
-ja: # 日本語の設定を行う
-  enums:
     order_item:
       making_status:
         pending: "着手不可"
         waiting: "制作待ち"
         working: "制作中"
         completed: "制作完了"
-
-ja:
-  activerecord:
-  errors:
-    messages:
-      record_invalid: "バリデーションに失敗しました: %{errors}"
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      short: "/%m/%d %H:%M"
