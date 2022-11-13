@@ -2,9 +2,26 @@
 class Public::ItemsController < ApplicationController
   before_action :authenticate_customer!, except: [:index, :show]
   def index
+    @items = Item.all
     @cakes = Item.where(genre_id: 1)
     @puddings = Item.where(genre_id: 2)
     @baked_sweets = Item.where(genre_id: 3)
+    @candies = Item.where(genre_id: 4)
+  end
+
+  def cakes
+    @cakes = Item.where(genre_id: 1)
+  end
+
+  def puddings
+    @puddings = Item.where(genre_id: 2)
+  end
+
+  def baked_sweets
+    @baked_sweets = Item.where(genre_id: 3)
+  end
+
+  def candies
     @candies = Item.where(genre_id: 4)
   end
 

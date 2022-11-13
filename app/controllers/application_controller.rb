@@ -21,17 +21,14 @@ class ApplicationController < ActionController::Base
       new_admin_session_path
     end
   end
+  #を使う！
 
   # def after_sign_in_path_for(resource_or_scope)
     # if resource_or_scope == :admin
       # admin_root_path
     # end
 
-  # def after_sign_in_path_for(resource_or_scope)
-    # if resource_or_scope == :customer
-# /      customers_my_page_path
-    # else
-      # resource_or_scope == :admin
-      # admin_root_path
-  # end
+  def after_sign_up_path_for(resource)
+    customers_my_page_path
+  end
 end

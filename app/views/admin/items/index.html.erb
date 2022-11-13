@@ -25,117 +25,21 @@
                 </tr>
               </thead>
               <tbody>
-                <% @cakes.each do |cake| %>
+                <% @items.each do |item| %>
                 <tr>
-                  <td><%= cake.id %></td>
+                  <td><%= item.id %></td>
                   <td>
-                    <%= link_to(admin_item_path(cake.id)) do %>
-                      <%= cake.name %>
+                    <%= link_to(admin_item_path(item.id)) do %>
+                      <%= item.name %>
                     <% end %>
                   </td>
-                  <td><%= cake.price.to_s(:delimited) %></td>
-                  <td><%= cake.genre.genre_name %></td>
-                  <% if cake.is_active == true %>
+                  <td><%= item.price.to_s(:delimited) %></td>
+                  <td><%= item.genre.genre_name %></td>
+                  <% if item.is_active == true %>
                     <td class="text-success fw-bold">販売中</td>
                   <% else %>
                     <td class="text-secondary">販売停止中</td>
                   <% end %>
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="category mb-5">
-            <h2>プリン</h2> <!--belongs_toだから、「genre」 *genresではない-->
-            <table class="table table-hover">
-              <thead class="table-secondary">
-                <tr>
-                  <th style="width: 20%">商品名</th>
-                  <th style="width: 20%">image</th>
-                  <th style="width: 20%">価格（税抜）</th>
-                  <th style="width: 20%">ステータス</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-              <% @puddings.each do |pudding| %>
-                <tr>
-                  <td><%= pudding.name %></td>
-                  <td><%= image_tag pudding.get_image(100, 100) %></td>
-                  <td><%= pudding.price %></td>
-                  <td>
-                    <% if pudding.is_active == true %>
-                      <%= "販売中" %>
-                    <% else %>
-                      <%= "準備中" %>
-                    <% end %>
-                  </td>
-                  <td><%= link_to "Show", (admin_item_path(pudding.id)),class: "btn btn-success" %></td>
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="category mb-5">
-            <h2>焼き菓子</h2> <!--belongs_toだから、「genre」 *genresではない-->
-            <table class="table table-hover">
-              <thead class="table-secondary">
-                <tr>
-                  <th style="width: 20%">商品名</th>
-                  <th style="width: 20%">image</th>
-                  <th style="width: 20%">価格（税抜）</th>
-                  <th style="width: 20%">ステータス</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @baked_sweets.each do |baked_sweet| %>
-                <tr>
-                  <td><%= baked_sweet.name %></td>
-                  <td><%= image_tag baked_sweet.get_image(100, 100) %></td>
-                  <td><%= baked_sweet.price %></td>
-                  <td>
-                    <% if baked_sweet.is_active == true %>
-                      <%= "販売中" %>
-                    <% else %>
-                      <%= "準備中" %>
-                    <% end %>
-                  </td>
-                  <td><%= link_to "Show", (admin_item_path(baked_sweet.id)),class: "btn btn-success" %></td>
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="category mb-5">
-            <h2>キャンディ</h2> <!--belongs_toだから、「genre」 *genresではない-->
-            <table class="table table-hover">
-              <thead class="table-secondary">
-                <tr>
-                  <th style="width: 20%">商品名</th>
-                  <th style="width: 20%">image</th>
-                  <th style="width: 20%">価格（税抜）</th>
-                  <th style="width: 20%">ステータス</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @candies.each do |candy| %>
-                <tr>
-                  <td><%= candy.name %></td>
-                  <td><%= image_tag candy.get_image(100, 100) %></td>
-                  <td><%= candy.price %></td>
-                  <td>
-                    <% if candy.is_active == true %>
-                      <%= "販売中" %>
-                    <% else %>
-                      <%= "準備中" %>
-                    <% end %>
-                  </td>
-                  <td><%= link_to "Show", (admin_item_path(candy.id)),class: "btn btn-success" %></td>
                 </tr>
                 <% end %>
               </tbody>

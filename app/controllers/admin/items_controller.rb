@@ -15,9 +15,22 @@ class Admin::ItemsController < ApplicationController
   end
 
   def index
+    @items = Item.all
+  end
+
+  def cakes
     @cakes = Item.where(genre_id: 1)
+  end
+
+  def puddings
     @puddings = Item.where(genre_id: 2)
+  end
+
+  def baked_sweets
     @baked_sweets = Item.where(genre_id: 3)
+  end
+
+  def candies
     @candies = Item.where(genre_id: 4)
   end
 

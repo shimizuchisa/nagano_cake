@@ -69,7 +69,7 @@
                   <td><%= sub_total = order_item.item.with_tax_price * order_item.amount %></td>
                   <% @order_item = order_item %>
                   <%= form_with model: @order_item, url: admin_order_item_path(@order_item), method: :patch do |f| %>
-                  <td><%= f.select :making_status, options_for_select(OrderItem.making_statuses_i18n.invert) %></td>
+                  <td><%= f.select :making_status, OrderItem.making_statuses_i18n.invert %></td>
                   <td><%= f.submit "更新", class: "btn btn-success" %>
                   <% end %>
                   </td>
