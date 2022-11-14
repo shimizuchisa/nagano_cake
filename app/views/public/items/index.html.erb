@@ -2,78 +2,26 @@
   <%= render 'layouts/public_header_template' %>
   <main>
     <div class="container">
-      <h1 class="mb-5">商品一覧<span>（全<%= Item.count %>件）</span></h1>
-      <h2>ケーキ</h2>
+      <h1 class="mb-5"><%= @genre %>一覧
+      <!--<span>（全%= @items.count - @items.where(is_active: false).count %>件）</span>-->
+      </h1>
 
       <div class="row">
         <div class="col-10 mx-auto d-flex flex-wrap">
-          <% @cakes.each do |cake| %>
-            <% if cake.is_active == true %>
+          <!--<% binding.pry %>-->
+          <% @items.each do |item| %>
+            <% if item.is_active == true %>
             <div class="card d-inline-flex" style="width: 33%;">
-              <%= link_to(item_path(cake.id)) do %>
-                <%= image_tag cake.get_image(100, 100), class: "card-img-top" %>
+              <%= link_to(item_path(item.id)) do %>
+                <%= image_tag item.get_image(100, 100), class: "card-img-top" %>
               <% end %>
               <div class="card-body">
-                <h5 class="card-title"><%= cake.name %></h5>
-                <p class="card-text">¥<%= cake.price %>円</p>
+                <h5 class="card-title"><%= item.name %></h5>
+                <p class="card-text">¥<%= item.price.to_s(:delimited) %>円</p>
               </div>
             </div>
             <% end %>
           <% end %>
-        </div>
-      </div>
-
-      <h2 class="mt-5">プリン</h2>
-      <div class="row">
-        <div class="col-10 mx-auto d-flex flex-wrap">
-          <% @puddings.each do |pudding| %>
-            <% if pudding.is_active == true %>
-          <div class="card d-inline-flex" style="width: 33%;">
-            <%= image_tag pudding.get_image(100, 100), class: "card-img-top" %>
-            <div class="card-body">
-              <h5 class="card-title"><%= pudding.name %></h5>
-              <p class="card-text">price：<span><%= pudding.price %>円</span></p>
-              <%= link_to "show", item_path(pudding.id), class: "btn btn-success btn-block" %>
-            </div>
-          </div>
-          <% end %>
-        <% end %>
-        </div>
-      </div>
-
-      <h2 class="mt-5">焼き菓子</h2>
-      <div class="row">
-        <div class="col-10 mx-auto d-flex flex-wrap">
-          <% @baked_sweets.each do |baked_sweet| %>
-           <% if baked_sweet.is_active == true %>
-          <div class="card d-inline-flex" style="width: 33%;">
-            <%= image_tag baked_sweet.get_image(100, 100), class: "card-img-top" %>
-            <div class="card-body">
-              <h5 class="card-title"><%= baked_sweet.name %></h5>
-              <p class="card-text">price：<span><%= baked_sweet.price %>円</span></p>
-              <%= link_to "show", item_path(baked_sweet.id), class: "btn btn-success btn-block" %>
-            </div>
-          </div>
-          <% end %>
-        <% end %>
-        </div>
-      </div>
-
-      <h2 class="mt-5">キャンディ</h2>
-      <div class="row">
-        <div class="col-10 mx-auto d-flex flex-wrap">
-          <% @candies.each do |candy| %>
-           <% if candy.is_active == true %>
-          <div class="card d-inline-flex" style="width: 33%;">
-            <%= image_tag candy.get_image(100, 100), class: "card-img-top" %>
-            <div class="card-body">
-              <h5 class="card-title"><%= candy.name %></h5>
-              <p class="card-text">price：<span><%= candy.price %>円</span></p>
-              <%= link_to "show", item_path(candy.id), class: "btn btn-success btn-block" %>
-            </div>
-          </div>
-          <% end %>
-        <% end %>
         </div>
       </div>
 

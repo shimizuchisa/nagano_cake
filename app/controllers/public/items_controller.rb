@@ -2,27 +2,26 @@
 class Public::ItemsController < ApplicationController
   before_action :authenticate_customer!, except: [:index, :show]
   def index
-    @items = Item.all
-    @cakes = Item.where(genre_id: 1)
-    @puddings = Item.where(genre_id: 2)
-    @baked_sweets = Item.where(genre_id: 3)
-    @candies = Item.where(genre_id: 4)
-  end
-
-  def cakes
-    @cakes = Item.where(genre_id: 1)
-  end
-
-  def puddings
-    @puddings = Item.where(genre_id: 2)
-  end
-
-  def baked_sweets
-    @baked_sweets = Item.where(genre_id: 3)
-  end
-
-  def candies
-    @candies = Item.where(genre_id: 4)
+    case params[:item_sort]
+      when "0"
+        @items = Item.all
+        @genre = "商品"
+      when "1"
+        @items = Item.where(genre_id: 1)
+        @genre = "ケーキ"
+      when "2"
+        @items = Item.where(genre_id: 2)
+        @genre = "プリン"
+      when "3"
+        @items = Item.where(genre_id: 3)
+        @genre = "焼き菓子"
+      when "4"
+        @items = Item.where(genre_id: 4)
+        @genre = "キャンディ"
+      when "5"
+        @items = Item.search(params[:search])
+        @genre = params[:search]
+    end
   end
 
   def show
@@ -30,4 +29,7 @@ class Public::ItemsController < ApplicationController
     @cart_item = CartItem.new
   end
 
+  # def search
+    # @items = Item.search(params[:search])
+  # end
 end

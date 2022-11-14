@@ -13,7 +13,7 @@
         <ul class="navbar-nav ml-auto">
           <% if customer_signed_in? %>
             <li class="nav-item"><%= link_to "マイページ", customers_my_page_path, class: "nav-link" %></li>
-            <li class="nav-item"><%= link_to "商品一覧", items_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "商品一覧", items_path(item_sort: 0), class: "nav-link" %></li>
             <li class="nav-item"><%= link_to "カート", cart_items_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link" %></li>
           <% else %>
@@ -23,6 +23,12 @@
             <li class="nav-item"><%= link_to "ログイン", new_customer_session_path, class: "nav-link" %></li>
           <% end %>
         </ul>
+        <div class="row d-block">
+          <%= form_tag(items_path(item_sort: 5), :method => 'get') do %>
+            <%= text_field_tag :name %>
+            <%= submit_tag "Search", class: "btn is-info" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </nav>
