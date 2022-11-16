@@ -35,8 +35,15 @@ class Public::SessionsController < Devise::SessionsController
 
     # 上記が存在している場合、そのアカウントのPWとログイン画面で入力されたPWが一致しているかを確認
     if @customer.valid_password?(params[:customer][:password]) && @customer.is_deleted == false
+    elsif @customer.valid_password?(params[:customer][:password]) && @customer.is_deleted == true
+      redirect_to new_customer_session_path
+      flash[:alert] = "以前に退会されています。お困りの際は、弊社までメールにてお問い合わせください。"
     else
       redirect_to new_customer_registration_path
     end
+    # if @customer.valid_password?(params[:customer][:password]) && @customer.is_deleted == false
+    # else
+      # redirect_to new_customer_registration_path
+    # end
   end
 end

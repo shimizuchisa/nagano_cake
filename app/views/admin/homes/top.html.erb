@@ -5,6 +5,7 @@
       <% if params[:customer_id].present? %>
       <h1><%= @customer.last_name %><%= @customer.first_name %>さんの注文履歴</h1>
       <% else %>
+      <%= render 'layouts/flash' %>
       <h1>注文履歴一覧</h1>
       <% end %>
       <div class="row">

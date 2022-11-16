@@ -9,6 +9,7 @@ class Admin::ItemsController < ApplicationController
     @item.is_active = true
     if @item.save
       redirect_to admin_item_path(@item)
+      flash[:notice] = "登録が完了しました"
     else
       render 'new'
     end
@@ -16,22 +17,6 @@ class Admin::ItemsController < ApplicationController
 
   def index
     @items = Item.page(params[:page])
-  end
-
-  def cakes
-    @cakes = Item.where(genre_id: 1)
-  end
-
-  def puddings
-    @puddings = Item.where(genre_id: 2)
-  end
-
-  def baked_sweets
-    @baked_sweets = Item.where(genre_id: 3)
-  end
-
-  def candies
-    @candies = Item.where(genre_id: 4)
   end
 
   def show
@@ -46,16 +31,16 @@ class Admin::ItemsController < ApplicationController
     @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to admin_item_path(@item)
+      flash[:notice] = "更新が完了しました"
     else
       @item = Item.find(params[:id])
       render 'edit'
-      flash[:notice] = "更新が完了しました"
     end
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:genre_id, :name, :introduction, :price, :image)
+    params.require(:item).permit(:genre_id, :name, :introduction, :price, :image, :is_active)
   end
 end
