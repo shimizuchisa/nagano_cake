@@ -1,29 +1,15 @@
-<table class="table">
-  <thead>
+<!-- @genres → genres -->
+<table class="table table-bordered">
+  <thead class="table-light">
     <tr>
-      <th>ジャンル検索</th>
+      <th class="text-center">ジャンル検索</th>
     </tr>
   </thead>
   <tbody>
+    <% genres.each do |genre| %>
     <tr>
-      <%= link_to() do %>
-      <td>ケーキ</td>
-      <% end %>
+      <td><%= link_to genre.genre_name, items_path(genre_id: genre.id) %></td>
     </tr>
-    <tr>
-      <%= link_to() do %>
-      <td>焼き菓子</td>
-      <% end %>
-    </tr>
-    <tr>
-      <%= link_to() do %>
-      <td>プリン</td>
-      <% end %>
-    </tr>
-    <tr>
-      <%= link_to() do %>
-      <td>キャンディ</td>
-      <% end %>
-    </tr>
+    <% end %>
   </tbody>
 </table>

@@ -2,29 +2,44 @@
   <%= render 'layouts/public_header_template' %>
   <main>
     <div class="container">
-      <h1 class="mb-5"><%= @genre %>一覧
-      <!--<span>（全%= @items.count - @items.where(is_active: false).count %>件）</span>-->
-      </h1>
-
-      <div class="row">
-        <div class="col-10 mx-auto d-flex flex-wrap">
-          <!--<% binding.pry %>-->
-          <% @items.each do |item| %>
-            <% if item.is_active == true %>
-            <div class="card d-inline-flex" style="width: 33%;">
-              <%= link_to(item_path(item.id)) do %>
-                <%= image_tag item.get_image(100, 100), class: "card-img-top" %>
-              <% end %>
-              <div class="card-body">
-                <h5 class="card-title"><%= item.name %></h5>
-                <p class="card-text">¥<%= item.price.to_s(:delimited) %>円</p>
-              </div>
-            </div>
+      <div class="row mx-auto">
+        <div class="col-2">
+          <%= render 'layouts/genre_search', genres: @genres %>
+        </div>
+        <div class="col-9 offset-1">
+          <div class="row">
+          <h1 class="mb-5">
+            <% if params[:genre_id].present? %>
+              <%= @genre.genre_name %>一覧
+            <% elsif params[:search].present? %>
+              検索一覧
+            <% else %>
+              商品一覧
             <% end %>
-          <% end %>
+            <span>（全<%= @items.total_count - @items.where(is_active: false).count %>件）</span>
+          </h1>
+          </div>
+
+          <div class="row">
+            <div class="mx-0 d-flex flex-wrap w-100">
+              <% @items.each do |item| %>
+                <% if item.is_active == true %>
+                <div class="card d-inline-flex" style="width: 33%;">
+                  <%= link_to(item_path(item.id)) do %>
+                    <%= image_tag item.get_image(100, 100), class: "card-img-top" %>
+                  <% end %>
+                  <div class="card-body">
+                    <h5 class="card-title"><%= item.name %></h5>
+                    <p class="card-text">¥<%= item.price.to_s(:delimited) %>円</p>
+                  </div>
+                </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <%= paginate @items %>
         </div>
       </div>
-
     </div>
   </main>
   <%= render 'layouts/footer_template' %>

@@ -13,10 +13,7 @@
  *= require_tree .
  *= require_self
  */
-.main-visual {
-  width: 100%; /* 横幅いっぱい */
-  height: 50px;
-  background-image: url("<%= asset_path('top.jpg') %>");
-  background-size: contain;
-  color: red;
+.pagination {
+  justify-content: center;
+  margin-top: 3em;
 }

@@ -1,35 +1,21 @@
 #public/items
 class Public::ItemsController < ApplicationController
   before_action :authenticate_customer!, except: [:index, :show]
+
   def index
-    case params[:item_sort]
-      when "0"
-        @items = Item.all
-        @genre = "商品"
-      when "1"
-        @items = Item.where(genre_id: 1)
-        @genre = "ケーキ"
-      when "2"
-        @items = Item.where(genre_id: 2)
-        @genre = "プリン"
-      when "3"
-        @items = Item.where(genre_id: 3)
-        @genre = "焼き菓子"
-      when "4"
-        @items = Item.where(genre_id: 4)
-        @genre = "キャンディ"
-      when "5"
-        @items = Item.search(params[:search])
-        @genre = params[:search]
+    @genres = Genre.all
+    @items = Item.page(params[:page])
+    @items = @items.where('name LIKE ?',"%#{params[:search]}%") if params[:search].present?
+    # @items = @items.where('introduction LIKE ?',"%#{params[:search]}%") if params[:search].present?
+    if params[:genre_id].present?
+      @items = @items.where(genre_id: params[:genre_id].to_i)
+      @genre = Genre.find(params[:genre_id])
     end
   end
 
   def show
+    @genres = Genre.all
     @item = Item.find(params[:id])
     @cart_item = CartItem.new
   end
-
-  # def search
-    # @items = Item.search(params[:search])
-  # end
 end

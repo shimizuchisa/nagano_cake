@@ -3,34 +3,14 @@
   <main>
     <div class="container">
       <div class="row">
-        <div class="col-3">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>ジャンル検索</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><%= link_to "ケーキ", items_path(item_sort: 1) %></td>
-              </tr>
-              <tr>
-                <td><%= link_to "焼き菓子", items_path(item_sort: 2) %></td>
-              </tr>
-              <tr>
-                <td><%= link_to "プリン", items_path(item_sort: 3) %></td>
-              </tr>
-              <tr>
-                <td><%= link_to "キャンディ", items_path(item_sort: 4) %></td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="col-2">
+          <%= render 'layouts/genre_search/', genres: @genres %>
         </div>
 
         <div class="col-8 offset-1 mt-5 p-0">
-          <div class="main-visual d-flex align-items-center">
-            <div class="main-visual-content w-50 mx-auto">
-              <P>ようこそながのCAKEへ！<br>
+          <div class="main-visual d-flex">
+            <div class="main-visual-content d-flex align-items-center mx-0">
+              <P class="text-center h3 mx-auto">ようこそながのCAKEへ！<br>
                  このサイトは、ケーキ販売のECサイトになります。<br>
                  会員でない方も商品の閲覧はできますが、<br>
                  購入には会員登録が必要になります。
@@ -75,5 +55,11 @@
   height: 500px;
   background-image: url("<%= asset_path('top.jpg') %>");
   background-size: cover;
+
+}
+.main-visual-content {
+  width: 100%;
+  height: 500px;
+  background-color: rgba(255, 255, 255, 0.562);
 }
 </style>

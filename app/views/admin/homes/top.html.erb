@@ -2,12 +2,16 @@
   <%= render '/layouts/admin_header_template' %>
   <main>
     <div  class="container">
+      <% if params[:customer_id].present? %>
+      <h1><%= @customer.last_name %><%= @customer.first_name %>さんの注文履歴</h1>
+      <% else %>
       <h1>注文履歴一覧</h1>
+      <% end %>
       <div class="row">
-        <div class="col-10">
+        <div class="w-100 mx-auto col-10 align-items-center">
           <div class="order_field mb-3">
-            <table class="table">
-              <thead>
+            <table class="table table-bordered">
+              <thead class="table-secondary">
                 <tr>
                   <th>購入日時</th>
                   <th>購入者</th>
@@ -23,7 +27,9 @@
                       <%= l order.created_at %>
                     <% end %>
                   </td>
-                  <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
+                  <td>
+                      <%= order.customer.last_name %><%= order.customer.first_name %>
+                  </td>
                   <% total_amount = 0 %>
                   <% order.order_items.each do |order_item| %>
                   <% total_amount += order_item.amount %>
@@ -37,11 +43,7 @@
           </div>
         </div>
       </div>
-
-      <div class: "justify-content-center">
-        <%= paginate @orders %>
-      </div>
-
+      <%= paginate @orders %>
     </div>
   </main>
   <%= render 'layouts/footer_template' %>
