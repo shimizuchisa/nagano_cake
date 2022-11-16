@@ -63,8 +63,8 @@ class Public::OrdersController < ApplicationController
   def show
     @order = current_customer.orders.find(params[:id])
     @order_items = @order.order_items
+    @total = 0
     @order_items.each do |order_item|
-      @total = 0
       sub_total = order_item.amount * order_item.item.with_tax_price
       @total += sub_total
     end

@@ -14,7 +14,7 @@
       </div>
       <div class="row">
         <div class="mx-auto">
-          <%= link_to "退会する", customers_unsubscribe_path, method: :patch, class: "btn btn-danger btn-lg mr-5" %>
+          <%= link_to "退会する", customers_unsubscribe_path, method: :patch, data: {confirm: "本当に退会しますか?"}, class: "btn btn-danger btn-lg mr-5" %>
           <%= link_to "退会しない", customers_my_page_path, method: :get, class: "btn btn-primary btn-lg" %>
         </div>
       </div>
